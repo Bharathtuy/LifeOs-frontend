@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>LifeOS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="layout" id="app">
+
+<div class="sidebar">
+
+<h2>LifeOS</h2>
+
+<button onclick="toggleTheme()">🌙 Theme</button>
+
+<button onclick="showPage('dashboard')">Dashboard</button>
+<button onclick="showPage('journal')">Journal</button>
+<button onclick="showPage('timetable')">Timetable</button>
+<button onclick="showPage('habits')">Habits</button>
+<button onclick="showPage('learning')">Learning</button>
+<button onclick="showPage('analytics')">Analytics</button>
+
+</div>
+
+<div class="main">
+
+<!-- Dashboard -->
+
+<div id="dashboard" class="page">
+
+<h1>Dashboard</h1>
+
+<div class="cards">
+
+<div class="card">
+<h3>Journal Entries</h3>
+<p id="journalCount">0</p>
+</div>
+
+<div class="card">
+<h3>Habits</h3>
+<p id="habitCount">0</p>
+</div>
+
+<div class="card">
+<h3>Learning</h3>
+<p id="learningCount">0</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- Journal -->
+
+<div id="journal" class="page">
+
+<h1>Journal</h1>
+
+<textarea id="journalInput" placeholder="Write your thoughts"></textarea>
+
+<button onclick="addJournal()">Save</button>
+
+<ul id="journalList"></ul>
+
+</div>
+
+<!-- Timetable -->
+
+<div id="timetable" class="page">
+
+<h1>Timetable</h1>
+
+<input type="time" id="timeInput">
+<input id="activityInput" placeholder="Activity">
+
+<button onclick="addSchedule()">Add</button>
+
+<ul id="scheduleList"></ul>
+
+</div>
+
+<!-- Habits -->
+
+<div id="habits" class="page">
+
+<h1>Habit Tracker</h1>
+
+<input id="habitInput" placeholder="New Habit">
+
+<button onclick="addHabit()">Add</button>
+
+<ul id="habitList"></ul>
+
+</div>
+
+<!-- Learning -->
+
+<div id="learning" class="page">
+
+<h1>Learning Tracker</h1>
+
+<input id="topicInput" placeholder="What did you learn today?">
+
+<button onclick="addLearning()">Add</button>
+
+<ul id="learningList"></ul>
+
+</div>
+
+<!-- Analytics -->
+
+<div id="analytics" class="page">
+
+<h1>Analytics</h1>
+
+<p>Total Journals: <span id="journalCount2"></span></p>
+<p>Total Habits: <span id="habitCount2"></span></p>
+<p>Total Learning: <span id="learningCount2"></span></p>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
