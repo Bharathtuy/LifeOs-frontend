@@ -107,11 +107,9 @@ function completeHabit(id,lastDate,streak){
 
 const today = new Date().toISOString().split("T")[0]
 
-let newStreak = streak || 0
+let newStreak = 1
 
-if(!lastDate){
-newStreak = 1
-}else{
+if(lastDate){
 
 const last = new Date(lastDate)
 const now = new Date(today)
@@ -121,12 +119,28 @@ const diff = Math.floor((now-last)/(1000*60*60*24))
 if(diff === 1){
 newStreak = streak + 1
 }
-else if(diff > 1){
-newStreak = 1
-}
-else{
+else if(diff === 0){
 newStreak = streak
 }
+else{
+newStreak = 1
+}
+
+}
+
+fetch(API+"/habits/"+id,{
+method:"PUT",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+streak:newStreak,
+last_completed:today
+})
+})
+.then(()=>{
+loadHabits()
+loadAnalytics()
+todayProgress()
+})
 
 }
 
