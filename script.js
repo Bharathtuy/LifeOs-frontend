@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 const API = "https://lifeos-backend-mhsa.onrender.com/"
-=======
 const API = "https://lifeos-backend-mhsa.onrender.com"
->>>>>>> 2371415 (Supabase changes are Updated)
 
 /* ---------- PAGE NAV ---------- */
 
