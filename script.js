@@ -109,22 +109,25 @@ const today = new Date().toISOString().split("T")[0]
 
 let newStreak = streak || 0
 
-if(lastDate){
+if(!lastDate){
+newStreak = 1
+}else{
 
 const last = new Date(lastDate)
 const now = new Date(today)
 
-const diff = (now-last)/(1000*60*60*24)
+const diff = Math.floor((now-last)/(1000*60*60*24))
 
 if(diff === 1){
-newStreak++
+newStreak = streak + 1
 }
 else if(diff > 1){
 newStreak = 1
 }
+else{
+newStreak = streak
+}
 
-}else{
-newStreak = 1
 }
 
 fetch(API+"/habits/"+id,{
@@ -138,6 +141,7 @@ last_completed:today
 .then(()=>{
 loadHabits()
 loadAnalytics()
+todayProgress()
 })
 
 }
