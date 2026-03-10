@@ -332,7 +332,7 @@ function deleteSchedule(id){
 
 fetch(API+"/timetable/"+id,{
 method:"DELETE"
-}). then(()=>{
+}).then(()=>{
 loadSchedule()
 loadAnalytics()
 })
