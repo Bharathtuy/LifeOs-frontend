@@ -100,6 +100,44 @@ function editJournal(id, content){
 
 
 /* ---------- HABITS ---------- */
+function completeHabit(id,lastDate,streak){
+
+const today = new Date().toISOString().split("T")[0]
+
+let newStreak = streak || 0
+
+if(lastDate){
+
+const last = new Date(lastDate)
+const now = new Date(today)
+
+const diff = (now-last)/(1000*60*60*24)
+
+if(diff === 1){
+newStreak++
+}
+else if(diff > 1){
+newStreak = 1
+}
+
+}else{
+newStreak = 1
+}
+
+fetch(API+"/habits/"+id,{
+method:"PUT",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+streak:newStreak,
+last_completed:today
+})
+})
+.then(()=>{
+loadHabits()
+loadAnalytics()
+})
+
+}
 
 function loadHabits(){
 
@@ -115,7 +153,8 @@ data.forEach(h=>{
 const li=document.createElement("li")
 
 li.innerHTML=`
-${h.habit}
+${h.habit} 🔥 ${h.streak || 0}
+<button onclick="completeHabit(${h.id},'${h.last_completed}',${h.streak || 0})">✅</button>
 <button onclick="editHabit(${h.id},'${h.habit}')">✏</button>
 <button onclick="deleteHabit(${h.id})">🗑</button>
 `
@@ -337,8 +376,63 @@ document.getElementById("learningCount").innerText=data.learning
 })
 
 }
+function loadChart(){
 
+fetch(API+"/analytics")
+.then(res=>res.json())
+.then(data=>{
 
+const ctx = document.getElementById("progressChart")
+
+new Chart(ctx,{
+type:"bar",
+data:{
+labels:["Journal","Habits","Learning"],
+datasets:[{
+label:"LifeOS Progress",
+data:[data.journal,data.habits,data.learning]
+}]
+}
+
+})
+
+})
+
+}
+function dailyReminder(){
+
+if(Notification.permission !== "granted"){
+Notification.requestPermission()
+}
+
+const now = new Date()
+
+if(now.getHours() === 21 && now.getMinutes() === 0){
+
+new Notification("LifeOS Reminder",{
+body:"Did you complete today's habits and journal?"
+})
+
+}
+
+}
+
+function todayProgress(){
+
+const today = new Date().toISOString().split("T")[0]
+
+fetch(API+"/habits")
+.then(res=>res.json())
+.then(data=>{
+
+const completed = data.filter(h=>h.last_completed === today).length
+
+document.getElementById("todayProgress").innerText =
+"Habits completed today: "+completed
+
+})
+
+}
 /* ---------- INIT ---------- */
 
 loadJournal()
@@ -348,3 +442,4 @@ loadAnalytics()
 loadSchedule()
 loadTheme()
 showPage("dashboard")
+setInterval(dailyReminder,60000)
