@@ -30,7 +30,7 @@ function loadTheme() {
 
 function loadJournal(){
 
-fetch(API+"/journal")
+fetch(API+"journal")
 .then(res=>res.json())
 .then(data=>{
 
@@ -59,7 +59,7 @@ function addJournal(){
 
 const text=document.getElementById("journalInput").value
 
-fetch(API+"/journal",{
+fetch(API+"journal",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({content:text})
@@ -76,7 +76,7 @@ loadAnalytics()
 
 function deleteJournal(id){
 
-fetch(API+"/journal/"+id,{
+fetch(API+"journal/"+id,{
 method:"DELETE"
 })    .then(() => loadJournal(loadAnalytics()));
 
@@ -88,7 +88,7 @@ function editJournal(id, content){
     // If user presses cancel or enters empty string, do nothing
     if(newText === null || newText.trim() === "") return;
 
-    fetch(API+"/journal/"+id,{
+    fetch(API+"journal/"+id,{
         method:"PUT",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({content:newText})
@@ -100,7 +100,7 @@ function editJournal(id, content){
 
 function loadHabits(){
 
-fetch(API+"/habits")
+fetch(API+"habits")
 .then(res=>res.json())
 .then(data=>{
 
