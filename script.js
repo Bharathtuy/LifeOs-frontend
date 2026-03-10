@@ -1,5 +1,5 @@
-const API = "https://lifeos-backend-mhsa.onrender.com/"
-// const API = "https://lifeos-backend-mhsa.onrender.com"
+// const API = "https://lifeos-backend-mhsa.onrender.com/"
+const API = "https://lifeos-backend-mhsa.onrender.com"
 
 /* ---------- PAGE NAV ---------- */
 
