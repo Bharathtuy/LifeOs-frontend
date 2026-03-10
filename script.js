@@ -78,7 +78,10 @@ function deleteJournal(id){
 
 fetch(API+"journal/"+id,{
 method:"DELETE"
-})    .then(() => loadJournal(loadAnalytics()));
+}).then(()=>{
+loadJournal()
+loadAnalytics()
+})
 
 }
 
@@ -136,16 +139,19 @@ body:JSON.stringify({habit:text})
 }).then(()=>{
 document.getElementById("habitInput").value=""
 loadHabits()
-})
 loadAnalytics()
+})
+
 }
 
 function deleteHabit(id){
 
 fetch(API+"/habits/"+id,{
 method:"DELETE"
-}).then(loadHabits)
+}).then(()=>{
+loadHabits()
 loadAnalytics()
+})
 }
 
 function editHabit(id,name){
@@ -210,8 +216,10 @@ function deleteLearning(id){
 
 fetch(API+"/learning/"+id,{
 method:"DELETE"
-}).then(loadLearning)
+}).then(()=>{
+loadLearning()
 loadAnalytics()
+})
 
 }
 
@@ -278,8 +286,10 @@ function deleteSchedule(id){
 
 fetch(API+"/timetable/"+id,{
 method:"DELETE"
-}).then(loadSchedule)
+}). then(()=>{
+loadSchedule()
 loadAnalytics()
+})
 
 }
 
