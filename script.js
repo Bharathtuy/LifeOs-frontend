@@ -10,6 +10,9 @@ function showPage(page){
     })
 
     document.getElementById(page).style.display="block"
+    if(page === "analytics"){
+     loadChart()
+}
 
 }
 /* ---------- THEME ---------- */
